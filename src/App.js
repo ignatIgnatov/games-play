@@ -15,8 +15,6 @@ const routes = {
   '/home': WelcomeWorld,
   '/games': GameCatalog,
   '/create-game': CreateGame,
-  '/'
-
 }
 
   return (
