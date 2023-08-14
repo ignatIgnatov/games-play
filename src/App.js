@@ -10,6 +10,15 @@ import GameCatalog from "./components/GameCatalog";
 
 
 function App() {
+
+const routes = {
+  '/home': WelcomeWorld,
+  '/games': GameCatalog,
+  '/create-game': CreateGame,
+  '/'
+
+}
+
   return (
     <div>
       <div id="box">
