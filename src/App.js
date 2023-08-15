@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import Header from "./components/Header";
 import WelcomeWorld from "./components/WelcomeWorld";
@@ -11,36 +11,27 @@ import GameCatalog from "./components/GameCatalog/GameCatalog";
 import ErrorPage from "./components/ErrorPage";
 
 function App() {
-  const [page, setPage] = useState("/home");
-
-  const navigationChangeHandler = (path) => {
-    setPage(path);
-  };
-
-  const router = (path) => {
-    let pathNames = path.split("/");
-    let rootPath = pathNames[1];
-    let argument = pathNames[2];
-
-    const routes = {
-      home: <WelcomeWorld navigationChangeHandler={navigationChangeHandler} />,
-      games: <GameCatalog navigationChangeHandler={navigationChangeHandler} />,
-      "create-game": <CreateGame />,
-      login: <LoginPage />,
-      register: <RegisterPage />,
-      details: <GameDetails id={argument} />,
-    };
-
-    return routes[rootPath];
-  };
-
   return (
     <div>
       <div id="box">
-        <Header navigationChangeHandler={navigationChangeHandler} />
+        <Header />
 
         <main id="main-content">
-          {router(page) || <ErrorPage> Some additional info </ErrorPage>}
+          <Switch>
+            <Route path="/" exact component={WelcomeWorld} />
+            <Route path="/games" exact component={GameCatalog} />
+            <Route path="/create-game" component={CreateGame} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegisterPage} />
+            <Route path="/games/:gameId" component={GameDetails} />
+            // пример за редирект:
+            <Route
+              path="/logout"
+              render={(props) => {
+                return <Redirect to="/" />;
+              }}
+            />
+          </Switch>
         </main>
       </div>
     </div>

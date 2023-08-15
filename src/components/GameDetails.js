@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import * as gameService from "../services/gameService";
 
-const GameDetails = ({ id }) => {
+const GameDetails = ({ match }) => {
+  
+  let id = match.params.gameId;
+
   const [game, setGame] = useState({});
 
   useEffect(() => {
